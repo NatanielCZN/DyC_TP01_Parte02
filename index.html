@@ -15,41 +15,41 @@
       }
 
       html {
-        scroll-behavior: smooth; /* Although scroll-snap handles most, this can help */
+        scroll-behavior: smooth; /* Aunque scroll-snap maneja la mayor parte, esto puede ayudar */
       }
 
       body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #fff;
-        overflow: hidden; /* Prevent body scrollbar, let container handle it */
+        overflow: hidden; /* Previene la barra de scroll del body, deja que el contenedor la maneje */
         background: linear-gradient(
           135deg,
           #667eea,
           #764ba2
-        ); /* Default gradient */
+        ); /* Gradiente por defecto */
       }
 
       .scroll-container {
         height: 100vh;
         overflow-y: scroll;
-        scroll-snap-type: y mandatory;
+        scroll-snap-type: y mandatory; /* Habilita el snap vertical */
         width: 100%;
       }
 
       section {
-        height: 100vh;
+        height: 100vh; /* Cada sección ocupa toda la altura del viewport */
         width: 100%;
-        scroll-snap-align: start;
+        scroll-snap-align: start; /* Alinea el inicio de la sección con el viewport al hacer snap */
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         padding: 40px;
         text-align: center;
-        position: relative; /* For potential future additions */
+        position: relative; /* Para posibles adiciones futuras */
       }
 
-      /* Different Backgrounds for each section */
+      /* Diferentes fondos para cada sección */
       #inicio {
         background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
       }
@@ -64,13 +64,96 @@
 
       #integrantes {
         background: linear-gradient(135deg, #43cea2, #185a9d);
+        display: flex; /* Usa flexbox para el contenedor de integrantes */
+        flex-direction: column; /* Por defecto en columna para pantallas pequeñas */
+        align-items: center;
+        justify-content: center;
+        overflow-y: auto; /* Permite scroll si el contenido excede la altura */
+        padding-top: 60px; /* Más espacio para el título "Integrantes" */
+        padding-bottom: 60px;
+      }
+
+      /* Estilos para el título dentro de la sección integrantes */
+      #integrantes h2 {
+        width: 100%; /* Asegura que el título ocupe el ancho */
+        margin-bottom: 20px; /* Espacio antes de las tarjetas */
+      }
+
+      .integrante {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px; /* Margen reducido para mejor ajuste */
+        text-align: center;
+        width: calc(80% - 20px); /* Ancho para pantallas pequeñas */
+        max-width: 300px; /* Ancho máximo en pantallas pequeñas */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex; /* Usa flexbox para el contenido interno de la tarjeta */
+        flex-direction: column; /* Imagen y nombre en columna */
+        align-items: center; /* Centra imagen y nombre */
+      }
+
+      .integrante img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px; /* Espacio entre imagen y nombre */
+        border: 3px solid rgba(255, 255, 255, 0.5);
+        display: none; /* Oculta la imagen por defecto (para pantallas pequeñas) */
+      }
+
+      .integrante span {
+        font-size: 0.9em;
+      }
+
+      /* Media query para tablets y pantallas más grandes */
+      @media (min-width: 768px) {
+        #integrantes {
+          flex-direction: row; /* Tarjetas en fila */
+          flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente línea */
+          justify-content: center; /* Centra las tarjetas en la fila */
+          align-items: flex-start; /* Alinea las tarjetas al inicio si hay varias filas */
+        }
+
+        .integrante {
+          width: calc(45% - 20px); /* Dos tarjetas por fila en tablets */
+          max-width: 220px; /* Ancho máximo ajustado */
+          margin: 15px;
+        }
+
+        .integrante img {
+          display: block; /* Muestra la imagen en pantallas más grandes */
+        }
+      }
+
+      /* Media query para desktops */
+      @media (min-width: 1200px) {
+        .integrante {
+          width: calc(18% - 30px); /* Aproximadamente cinco tarjetas por fila */
+          max-width: 200px;
+        }
+      }
+
+      .integrante:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       }
 
       h1,
       h2 {
+        /* Estilo general para h1 y h2, el h2 de integrantes se sobreescribe arriba */
         margin-bottom: 30px;
-        font-size: 3em;
+        font-size: 2.5em;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      @media (min-width: 768px) {
+        h1,
+        h2 {
+          font-size: 3em;
+        }
       }
 
       p {
@@ -82,22 +165,22 @@
 
       ul {
         list-style: none;
-        font-size: 1.2em;
+        padding: 0;
       }
 
-      li {
+      #preguntas ul li {
         margin-bottom: 15px;
         background-color: rgba(255, 255, 255, 0.1);
-        padding: 10px 20px;
-        border-radius: 5px;
-        transition: transform 0.3s ease;
+        padding: 15px 25px;
+        border-radius: 8px;
+        transition: transform 0.3s ease, background-color 0.3s ease;
       }
 
-      li:hover {
+      #preguntas ul li:hover {
         transform: scale(1.05);
+        background-color: rgba(255, 255, 255, 0.2);
       }
 
-      /* Simple Navigation (Optional) */
       nav {
         position: fixed;
         right: 20px;
@@ -114,75 +197,145 @@
         background: rgba(255, 255, 255, 0.6);
         border-radius: 50%;
         text-decoration: none;
-        transition: background 0.3s ease;
+        transition: background 0.3s ease, transform 0.3s ease;
       }
-      nav a:hover,
-      nav a.active {
-        /* You would need JS to add 'active' class */
+      nav a:hover {
         background: #fff;
+        transform: scale(1.2);
+      }
+      nav a.active {
+        background: #fff;
+        transform: scale(1.3);
       }
     </style>
   </head>
   <body>
     <nav>
-      <a href="#inicio"></a>
-      <a href="#preguntas"></a>
-      <a href="#contenido"></a>
-      <a href="#integrantes"></a>
+      <a
+        href="#inicio"
+        title="Inicio"
+      ></a>
+      <a
+        href="#preguntas"
+        title="Preguntas"
+      ></a>
+      <a
+        href="#contenido"
+        title="Contenido"
+      ></a>
+      <a
+        href="#integrantes"
+        title="Integrantes"
+      ></a>
     </nav>
 
     <div class="scroll-container">
       <section id="inicio">
         <h1>TP 01</h1>
         <p>Un Trabajo Práctico con Scroll Snap</p>
-        <p style="font-size: 0.8em; margin-top: 50px">
-          (Desliza hacia abajo para navegar)
+        <p style="font-size: 0.9em; margin-top: 50px; opacity: 0.8">
+          (Desliza hacia abajo o usa la navegación lateral para navegar)
         </p>
       </section>
 
       <section id="preguntas">
         <h2>Preguntas</h2>
         <ul>
-          <li>¿Qué es HTML5 y cuáles son sus nuevas características?</li>
-          <li>¿Cuál es la diferencia entre CSS Grid y Flexbox?</li>
-          <li>Explica el concepto de 'Responsive Web Design'.</li>
-          <li>¿Cómo funciona el 'scroll-snap' en CSS?</li>
-          <li>Menciona 3 buenas prácticas de accesibilidad web (WCAG).</li>
+          <li>¿Cómo puede la didáctica garantizar que la IA se utilice como herramienta de inclusión y no de exclusión en el aula?</li>
+          <li>¿Qué estrategias y herramientas basadas en IA pueden promover la participación activa de estudiantes con requerimientos educativos particulares sin comprometer la equidad y la inclusión en el aula?</li>
+          <li>¿Qué nuevos contenidos y habilidades deben priorizarse en los planes de estudio para formar a los estudiantes?</li>
+          <li>¿De qué manera la IA puede potenciar la personalización del aprendizaje, permitiendo adaptar los métodos y ritmos a las necesidades individuales de cada estudiante?</li>
+          <li>¿Cómo puede ayudar la didáctica a que el uso de la inteligencia artificial en el aula realmente sirva para que los chicos aprendan mejor?</li>
+          <li>¿Cómo puede la didáctica acompañar al docente para que use la inteligencia artificial como una herramienta útil, sin que el alumno se vuelva dependiente de ella?</li>
+          <li>¿Cómo nos puede ayudar la didáctica a saber si la inteligencia artificial está ayudando a los estudiantes a pensar, a aprender y a trabajar con otros?</li>
+          <li>¿De qué forma puede la didáctica ayudar a que todos los estudiantes, sin importar sus dificultades, puedan aprovechar el uso de la inteligencia artificial en clase?</li>
+          <li>¿Qué necesita aprender un docente, según la didáctica, para poder usar la inteligencia artificial con sus alumnos de una manera responsable y educativa?</li>
+          <li>¿Cómo puede la didáctica ayudar a planificar clases que usen la inteligencia artificial, pensando en que cada alumno aprende de manera diferente?</li>
+          <li>¿Qué puede hacer la didáctica para que, aunque los estudiantes usen inteligencia artificial, no pierdan la curiosidad, la creatividad ni las ganas de pensar por sí mismos?</li>
         </ul>
       </section>
 
       <section id="contenido">
         <h2>Contenido</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-        <p>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum.
-        </p>
-        <p>
-          Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam
-          varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus
-          magna felis sollicitudin mauris. Integer in mauris eu nibh euismod
-          gravida. Duis ac tellus et risus vulputate vehicula.
+          La Inteligencia Artificial ha irrumpido en nuestras aulas y en la vida cotidiana de manera vertiginosa, y para incorporarla con consciencia necesitamos, al mismo tiempo, comprender sus orígenes y apoyarnos en los sólidos fundamentos de la didáctica y el currículo.
+Cuando en 1996 el ordenador Deep Blue venció al campeón mundial de ajedrez, muchos vieron un triunfo técnico sin precedentes; otros, en cambio, lo interpretaron como un eslabón más en la larga cadena de invenciones humanas que nacieron de la necesidad de ampliar nuestras capacidades. Siglos antes, los quipus servían para registrar y transmitir información compleja en textiles anudados; hoy, los correctores automáticos anticipan nuestras palabras y revisan nuestro estilo. Ambos ejemplos muestran que la “tecnología de la palabra” ha acompañado siempre al ser humano, y que la aparición de modelos de lenguaje como ChatGPT en noviembre de 2022 no es un punto de quiebre sino el siguiente capítulo de esa historia.
+La llegada de ChatGPT encontró a un grupo de pioner@s dispuest@s a probar diálogos inesperados, a generar imágenes a partir de simples descripciones y a diseñar nuevas formas de análisis de datos. En pocas semanas, millones de personas compartieron sus hallazgos, maravillándose con la creatividad de la IA pero también preguntándose cómo preservar la honestidad académica o distinguir entre una idea genuina y una producida por un algoritmo que ha leído gran parte de la web. Estas preguntas dejaron claro que celebrar la innovación sin acompañarla de reflexiones éticas sería tan imprudente como ignorar el potencial de la herramienta.
+En el terreno educativo, los principios de la Didáctica y el currículo nos ofrecen la brújula para orientar esa innovación. No basta con decidir qué contenidos impartir; es esencial escuchar las inquietudes del estudiantado, ajustar el ritmo de las clases a sus intereses y reconocer cada paso como parte de un proceso colectivo de descubrimiento. Soñar con “e-docentes” que personalicen ejercicios y evalúen progresos de manera individual solo tiene sentido si todas las escuelas, incluidas las menos favorecidas, cuentan con las mismas oportunidades tecnológicas.
+A lo largo de la historia, la Didáctica ha evolucionado desde modelos centrados en la memorización hacia enfoques constructivistas donde el aprendizaje es un acto activo y colaborativo. Esa transformación nos recuerda que la IA debe integrarse como un recurso que estimule la exploración, la experimentación y el diálogo, y no como un atajo que supla la reflexión. Incluso nuestras evaluaciones deben ampliar su mirada: no basta con cuantificar respuestas correctas, sino valorar la creatividad, el pensamiento crítico y la capacidad de aplicar conocimientos en situaciones reales.
+Al combinar estos dos ámbitos —los antecedentes de la IA y los fundamentos de la Didáctica y el Currículo— encontramos un camino claro: usar la tecnología para potenciar la imaginación, el debate y la construcción conjunta de saberes. Así, docentes y estudiantes podrán transitar un proyecto educativo donde la innovación no reemplace la riqueza del encuentro humano, sino que la amplíe con responsabilidad, curiosidad y colaboración.
         </p>
       </section>
 
       <section id="integrantes">
         <h2>Integrantes</h2>
-        <ul>
-          <li>Integrante 1 - Nombre Apellido</li>
-          <li>Integrante 2 - Nombre Apellido</li>
-          <li>Integrante 3 - Nombre Apellido</li>
-          <li>Integrante 4 - Nombre Apellido</li>
-          <li>Integrante 5 - Nombre Apellido</li>
-        </ul>
+        <div class="integrante">
+          <img
+            src="https://placehold.co/80x80/FFC0CB/333333?text=Perfil1&font=Inter"
+            alt="Cazon Nataniel Patricio Jesús"
+          />
+          <span>Cazon Nataniel Patricio Jesús</span>
+        </div>
+        <div class="integrante">
+          <img
+            src="https://placehold.co/80x80/ADD8E6/333333?text=Perfil2&font=Inter"
+            alt="Tejerina Guillermo Fernando"
+          />
+          <span>Tejerina Guillermo Fernando</span>
+        </div>
+        <div class="integrante">
+          <img
+            src="https://placehold.co/80x80/90EE90/333333?text=Perfil3&font=Inter"
+            alt="Mamani Gabriel Alejandro"
+          />
+          <span>Mamani Gabriel Alejandro</span>
+        </div>
+        <div class="integrante">
+          <img
+            src="https://placehold.co/80x80/FFFFE0/333333?text=Perfil4&font=Inter"
+            alt="Flores Martin Gerardo"
+          />
+          <span>Flores Martin Gerardo</span>
+        </div>
+        <div class="integrante">
+          <img
+            src="https://placehold.co/80x80/E6E6FA/333333?text=Perfil5&font=Inter"
+            alt="Ayala Fernando Nicolas"
+          />
+          <span>Ayala Fernando Nicolas</span>
+        </div>
       </section>
     </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('section')
+        const navLinks = document.querySelectorAll('nav a')
+        const scrollContainer = document.querySelector('.scroll-container')
+
+        function changeNav() {
+          let index = sections.length
+
+          // Determina la sección visible ajustando la sensibilidad del scroll
+          // scrollTop + una porción de la altura del viewport para activar antes
+          while (
+            --index &&
+            scrollContainer.scrollTop + scrollContainer.clientHeight / 2 <
+              sections[index].offsetTop
+          ) {}
+
+          navLinks.forEach((link) => link.classList.remove('active'))
+          if (index >= 0 && index < navLinks.length) {
+            // Verifica que el índice sea válido
+            navLinks[index].classList.add('active')
+          }
+        }
+
+        if (scrollContainer) {
+          scrollContainer.addEventListener('scroll', changeNav)
+        }
+        changeNav() // Llama inicialmente para establecer el estado activo
+      })
+    </script>
   </body>
 </html>
