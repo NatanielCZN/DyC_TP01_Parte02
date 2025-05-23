@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>TP 01</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth; /* Although scroll-snap handles most, this can help */
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        overflow: hidden; /* Prevent body scrollbar, let container handle it */
+        background: linear-gradient(
+          135deg,
+          #667eea,
+          #764ba2
+        ); /* Default gradient */
+      }
+
+      .scroll-container {
+        height: 100vh;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        width: 100%;
+      }
+
+      section {
+        height: 100vh;
+        width: 100%;
+        scroll-snap-align: start;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 40px;
+        text-align: center;
+        position: relative; /* For potential future additions */
+      }
+
+      /* Different Backgrounds for each section */
+      #inicio {
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      }
+
+      #preguntas {
+        background: linear-gradient(135deg, #00b09b, #96c93d);
+      }
+
+      #contenido {
+        background: linear-gradient(135deg, #ff5f6d, #ffc371);
+      }
+
+      #integrantes {
+        background: linear-gradient(135deg, #43cea2, #185a9d);
+      }
+
+      h1,
+      h2 {
+        margin-bottom: 30px;
+        font-size: 3em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      p {
+        max-width: 800px;
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      ul {
+        list-style: none;
+        font-size: 1.2em;
+      }
+
+      li {
+        margin-bottom: 15px;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+      }
+
+      li:hover {
+        transform: scale(1.05);
+      }
+
+      /* Simple Navigation (Optional) */
+      nav {
+        position: fixed;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+      }
+
+      nav a {
+        display: block;
+        width: 12px;
+        height: 12px;
+        margin: 15px 0;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
+      nav a:hover,
+      nav a.active {
+        /* You would need JS to add 'active' class */
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#inicio"></a>
+      <a href="#preguntas"></a>
+      <a href="#contenido"></a>
+      <a href="#integrantes"></a>
+    </nav>
+
+    <div class="scroll-container">
+      <section id="inicio">
+        <h1>TP 01</h1>
+        <p>Un Trabajo Práctico con Scroll Snap</p>
+        <p style="font-size: 0.8em; margin-top: 50px">
+          (Desliza hacia abajo para navegar)
+        </p>
+      </section>
+
+      <section id="preguntas">
+        <h2>Preguntas</h2>
+        <ul>
+          <li>¿Qué es HTML5 y cuáles son sus nuevas características?</li>
+          <li>¿Cuál es la diferencia entre CSS Grid y Flexbox?</li>
+          <li>Explica el concepto de 'Responsive Web Design'.</li>
+          <li>¿Cómo funciona el 'scroll-snap' en CSS?</li>
+          <li>Menciona 3 buenas prácticas de accesibilidad web (WCAG).</li>
+        </ul>
+      </section>
+
+      <section id="contenido">
+        <h2>Contenido</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+        <p>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum.
+        </p>
+        <p>
+          Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam
+          varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus
+          magna felis sollicitudin mauris. Integer in mauris eu nibh euismod
+          gravida. Duis ac tellus et risus vulputate vehicula.
+        </p>
+      </section>
+
+      <section id="integrantes">
+        <h2>Integrantes</h2>
+        <ul>
+          <li>Integrante 1 - Nombre Apellido</li>
+          <li>Integrante 2 - Nombre Apellido</li>
+          <li>Integrante 3 - Nombre Apellido</li>
+          <li>Integrante 4 - Nombre Apellido</li>
+          <li>Integrante 5 - Nombre Apellido</li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
