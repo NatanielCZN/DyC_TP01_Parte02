@@ -203,6 +203,7 @@
         flex-shrink: 1; /* Permite que la lista se encoja si es necesario */
         overflow-y: auto; /* Habilita el scroll vertical si el contenido excede el alto */
         min-height: 0; /* Necesario para que flex-shrink funcione correctamente con overflow */
+        max-width: 800px;
         padding-right: 5px; /* Espacio para el scrollbar delgado */
       }
 
@@ -265,24 +266,8 @@
 
       #preguntas ul::-webkit-scrollbar-thumb,
       #contenido p::-webkit-scrollbar-thumb {
-        background-color: rgba(
-          255,
-          255,
-          255,
-          0.3
-        ); /* Color del pulgar del scroll */
         border-radius: 10px; /* Redondez del pulgar del scroll */
         border: none; /* Sin borde */
-      }
-
-      #preguntas ul::-webkit-scrollbar-thumb:hover,
-      #contenido p::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(
-          255,
-          255,
-          255,
-          0.5
-        ); /* Color del pulgar del scroll en hover */
       }
 
       #inicio h1 {
@@ -471,7 +456,7 @@
         </div>
         <div class="integrante">
           <img
-            src="https://placehold.co/80x80/FFFFE0/333333?text=Perfil4&font=Inter"
+            src="./martin.jpg"
             alt="Flores Martin Gerardo"
           />
           <span>Flores Martin Gerardo</span>
